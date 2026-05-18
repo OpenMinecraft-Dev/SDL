@@ -17,6 +17,7 @@
 #include "../../video/ohos/SDL_ohostouch.h"
 #include "../../video/ohos/SDL_ohosvideo.h"
 #include "SDL3/SDL_mutex.h"
+#include "SDL3/SDL_system.h"
 #include "SDL_ohos.h"
 #include "napi/native_api.h"
 #include <ace/xcomponent/native_interface_xcomponent.h>
@@ -887,8 +888,8 @@ static napi_value sdlSendDialogStatus(napi_env env, napi_callback_info info)
 
 static napi_value sdlOnBackground(napi_env env, napi_callback_info info)
 {
-    SDL_SendAppEvent(SDL_EVENT_WILL_ENTER_BACKGROUND);
-    SDL_SendAppEvent(SDL_EVENT_DID_ENTER_BACKGROUND);
+    SDL_OnApplicationWillEnterBackground();
+    SDL_OnApplicationDidEnterBackground();
 
     napi_value result;
     napi_create_int32(env, 0, &result);
@@ -897,8 +898,8 @@ static napi_value sdlOnBackground(napi_env env, napi_callback_info info)
 
 static napi_value sdlOnForeground(napi_env env, napi_callback_info info)
 {
-    SDL_SendAppEvent(SDL_EVENT_WILL_ENTER_FOREGROUND);
-    SDL_SendAppEvent(SDL_EVENT_DID_ENTER_FOREGROUND);
+    SDL_OnApplicationWillEnterForeground();
+    SDL_OnApplicationDidEnterForeground();
 
     napi_value result;
     napi_create_int32(env, 0, &result);
